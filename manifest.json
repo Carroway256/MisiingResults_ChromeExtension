@@ -1,0 +1,18 @@
+{
+    "manifest_version":2,
+    "name": "foodtracker",
+    "version" : "0.2",
+    "browser_action":{
+        "default_popup":"popup.html"
+    },
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "<all_urls>"
+
+      ],
+      "background" : {
+          "scripts":["background.js"]
+    }
+
+}
