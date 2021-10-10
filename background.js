@@ -2,12 +2,11 @@ var lastSearched = "";
 var engine = "";
 function getQuerry(requestDetails) {
   getEngine();
-
   if (requestDetails.tabId >= 0) {
     const urlSearchParams = new URLSearchParams(requestDetails.url);
     const URL = urlSearchParams.toString();
     console.log(URL);
-    console.log(engine);
+    console.log(this.engine);
     if (requestDetails.url == lastSearched) {
       console.log("done");
       return;
