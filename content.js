@@ -1,14 +1,20 @@
-window.onload = ()=> {
-  var btnGoogle = document.getElementById("btnGoogle");
-  btnGoogle.addEventListener("click", this.startSearch);
+var googleEngine = "https://www.google.com/search?q=";
+var duckEngine = "https://duckduckgo.com/?q=";
+var bingEngine = "https://www.bing.com/search?q=";
 
-  var btnBing = document.getElementById("btnBing");
-  btnBing.addEventListener("click", this.startSearch);
 
-  var btnDuckDuckGo = document.getElementById("btnDuckDuckGo");
-  btnDuckDuckGo.addEventListener("click", this.startSearch);
 
-};
-function startSearch() {
-    document.getElementById("Protein").innerHTML = "tak";
+function asssignEngine(engine) {
+  chrome.storage.local.set({ key: engine }, function () {
+
+  });
 }
+
+document.getElementById("btnGoogle").addEventListener("click",()=> asssignEngine(googleEngine));
+
+var btnBing = document.getElementById("btnBing");
+btnBing.addEventListener("click",()=> asssignEngine(bingEngine));
+
+var btnDuckDuckGo = document.getElementById("btnDuckDuckGo");
+btnDuckDuckGo.addEventListener("click",()=> asssignEngine(duckEngine));
+

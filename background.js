@@ -1,20 +1,28 @@
+var lastSearched = "";
+var engine = "";
 function getQuerry(requestDetails) {
+  getEngine();
+
   if (requestDetails.tabId >= 0) {
-    console.log(requestDetails);
     const urlSearchParams = new URLSearchParams(requestDetails.url);
     const URL = urlSearchParams.toString();
     console.log(URL);
-    var arrStr = URL.split(/[=&]/);
-    var querry = arrStr[1];
-    console.log(options[0]);
-    chrome.tabs.update({ url: `https://duckduckgo.com/?q=${querry}` });
+    console.log(engine);
+    if (requestDetails.url == lastSearched) {
+      console.log("done");
+      return;
+    } else {
+      lastSearched = requestDetails.url;
+      if (isURL(URL)) {
+        console.log("current engine :", engine);
+        var arrStr = URL.split(/[=&]/);
+        var querry = arrStr[1];
+        chrome.tabs.update({ url: `${engine}${querry}` });
+      }
+    }
   }
 }
 
-function pickEngine(chosenEngine) {
-  if (chosenEngine == "googleSearch") {
-  }
-}
 var filter = { urls: ["<all_urls>"], types: ["main_frame"] };
 var opt_extraInfoSpec = [];
 
@@ -24,10 +32,15 @@ chrome.webRequest.onBeforeRequest.addListener(
   opt_extraInfoSpec
 );
 
-class googleSearch {
-  constructor(url) {
-    this.url = url;
-  }
+function isURL(URL) {
+  if (URL.startsWith("https%3A%2F%2Fwww.google.com%2F")) {
+    console.log("redirect");
+    return true;
+  } else return false;
 }
+function getEngine() {
+  chrome.storage.local.get(["key"], (result) => {
+    engine = result.key;
 
-const options = [new googleSearch("https://www.google.com/search?q=")];
+  });
+}
