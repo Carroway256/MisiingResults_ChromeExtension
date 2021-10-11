@@ -1,12 +1,12 @@
 var lastSearched = "";
 var engine = "";
-function getQuerry(requestDetails) {
-  getEngine();
+async function getQuerry(requestDetails) {
+  let engine = await getEngine();
   if (requestDetails.tabId >= 0) {
     const urlSearchParams = new URLSearchParams(requestDetails.url);
     const URL = urlSearchParams.toString();
     console.log(URL);
-    console.log(this.engine);
+    console.log(engine);
     if (requestDetails.url == lastSearched) {
       console.log("done");
       return;
@@ -37,9 +37,12 @@ function isURL(URL) {
     return true;
   } else return false;
 }
-function getEngine() {
-  chrome.storage.local.get(["key"], (result) => {
-    engine = result.key;
-
+const getEngine = async () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(["key"], (result) => {
+      if (result["key"] === undefined) {
+        reject();
+      } else resolve(result["key"]);
+    });
   });
-}
+};
