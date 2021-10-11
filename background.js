@@ -1,19 +1,17 @@
 var lastSearched = "";
 var engine = "";
 async function getQuerry(requestDetails) {
-  let engine = await getEngine();
-  if (requestDetails.tabId >= 0) {
-    const urlSearchParams = new URLSearchParams(requestDetails.url);
-    const URL = urlSearchParams.toString();
-    console.log(URL);
-    console.log(engine);
-    if (requestDetails.url == lastSearched) {
-      console.log("done");
-      return;
-    } else {
+  if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
+    console.log("done");
+    return;
+  } else {
+    let engine = await getEngine();
+    if (requestDetails.tabId >= 0) {
+      const urlSearchParams = new URLSearchParams(requestDetails.url);
+      const URL = urlSearchParams.toString();
+      console.log(URL);
       lastSearched = requestDetails.url;
       if (isURL(URL)) {
-        console.log("current engine :", engine);
         var arrStr = URL.split(/[=&]/);
         var querry = arrStr[1];
         chrome.tabs.update({ url: `${engine}${querry}` });
@@ -32,8 +30,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 function isURL(URL) {
-  if (URL.startsWith("https%3A%2F%2Fwww.google.com%2F")) {
-    console.log("redirect");
+  if (URL.startsWith("https%3A%2F%2Fwww.google.com%2Fsearch")) {
+    console.log("true")
     return true;
   } else return false;
 }
