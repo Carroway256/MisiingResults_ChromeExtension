@@ -13,9 +13,11 @@
         "storage"
 
       ],
+      "web_accessible_resources": [
+        "engine.js"
+     ],
       "background" : {
-
-          "scripts":["background.js"]
+            "page":"background.html"
     }
 
 }

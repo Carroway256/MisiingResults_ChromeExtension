@@ -1,6 +1,10 @@
+import searchengine from "/enigne.js"
+var engine =await searchengine.getSearchEngine()
+
 var lastSearched = "";
-var engine = "";
+
 async function getQuerry(requestDetails) {
+
   if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
     console.log("done");
     return;
@@ -14,6 +18,7 @@ async function getQuerry(requestDetails) {
       if (isURL(URL)) {
         var arrStr = URL.split(/[=&]/);
         var querry = arrStr[1];
+        console.log(engine)
         chrome.tabs.update({ url: `${engine}${querry}` });
       }
     }
@@ -44,3 +49,4 @@ const getEngine = async () => {
     });
   });
 };
+
