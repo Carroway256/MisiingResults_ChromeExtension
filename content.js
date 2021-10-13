@@ -1,16 +1,20 @@
-import searchengine from "/enigne.js"
-export function main(){
-var googleEngine = "https://www.google.com/search?q=";
-var duckEngine = "https://duckduckgo.com/?q=";
-var bingEngine = "https://www.bing.com/search?q=";
+import Engine from "/enigne.js";
+export function main() {
+  var googleEngine = "https://www.google.com/search?q=";
+  var duckEngine = "https://duckduckgo.com/?q=";
+  var bingEngine = "https://www.bing.com/search?q=";
 
+  var engine = new Engine();
 
-document.getElementById("btnGoogle").addEventListener("click",()=> searchengine.setSearchEnginge(googleEngine));
+  document
+    .getElementById("btnGoogle")
+    .addEventListener("click", () => engine.setSearchEnginge(googleEngine));
 
-var btnBing = document.getElementById("btnBing");
-btnBing.addEventListener("click",()=> searchengine.setSearchEnginge(bingEngine));
+  document
+    .getElementById("btnBing")
+    .addEventListener("click", () => engine.setSearchEnginge(bingEngine));
 
-var btnDuckDuckGo = document.getElementById("btnDuckDuckGo");
-btnDuckDuckGo.addEventListener("click",()=> searchengine.setSearchEnginge(duckEngine));
+  document
+    .getElementById("btnDuckDuckGo")
+    .addEventListener("click", () => engine.setSearchEnginge(duckEngine));
 }
-

@@ -1,15 +1,16 @@
-import searchengine from "/enigne.js"
-var engine =await searchengine.getSearchEngine()
+import Engine from "/enigne.js";
 
+var engine = new Engine();
 var lastSearched = "";
 
 async function getQuerry(requestDetails) {
-
-  if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
-    console.log("done");
+  if (
+    requestDetails.url == lastSearched ||
+    requestDetails.url == "https://www.google.com/webhp"
+  ) {
     return;
   } else {
-    let engine = await getEngine();
+    let searchEngine = await engine.getSearchEngine();
     if (requestDetails.tabId >= 0) {
       const urlSearchParams = new URLSearchParams(requestDetails.url);
       const URL = urlSearchParams.toString();
@@ -18,8 +19,8 @@ async function getQuerry(requestDetails) {
       if (isURL(URL)) {
         var arrStr = URL.split(/[=&]/);
         var querry = arrStr[1];
-        console.log(engine)
-        chrome.tabs.update({ url: `${engine}${querry}` });
+        console.log(searchEngine);
+        chrome.tabs.update({ url: `${searchEngine}${querry}` });
       }
     }
   }
@@ -33,20 +34,19 @@ chrome.webRequest.onBeforeRequest.addListener(
   filter,
   opt_extraInfoSpec
 );
+function isInfinityloop (requestDetails)
+{
+  if (
+    requestDetails.url == lastSearched ||
+    requestDetails.url == "https://www.google.com/webhp"
+  ) {
+    return;
+}
+}
 
 function isURL(URL) {
   if (URL.startsWith("https%3A%2F%2Fwww.google.com%2Fsearch")) {
-    console.log("true")
+    console.log("true");
     return true;
   } else return false;
 }
-const getEngine = async () => {
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get(["key"], (result) => {
-      if (result["key"] === undefined) {
-        reject();
-      } else resolve(result["key"]);
-    });
-  });
-};
-

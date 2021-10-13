@@ -1,32 +1,31 @@
 class Engine {
-  constructor(_engine) {
+  constructor() {
     if (Engine.instance == null) {
-      this._engine = "";
       Engine.instance = this;
     }
+    this._engine = "";
     return Engine.instance;
   }
- setSearchEnginge(newEngine) {
+  setSearchEnginge(newEngine) {
     this._engine = newEngine;
     chrome.storage.local.set({ key: newEngine });
+    console.log(this._engine);
   }
   getSearchEngine = async () => {
     if (this._engine == "") {
-      const promise =new Promise((resolve, reject) => {
+      const promise = new Promise((resolve, reject) => {
         chrome.storage.local.get(["key"], (result) => {
           if (result["key"] === undefined) {
             reject();
-          }
-           else resolve(result["key"])
-        });  
-      })
-      
-      return promise.then( value => {return value})
-    }
-    else
-    return this._engine
+          } else resolve(result["key"]);
+        });
+      });
+
+      return promise.then((value) => {
+        return value;
+      });
+    } else return this._engine;
   };
 }
-const searchengine = new Engine();
-Object.freeze(searchengine);
-export default searchengine;
+
+export default Engine;
