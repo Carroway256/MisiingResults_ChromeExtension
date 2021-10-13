@@ -1,6 +1,5 @@
 import Engine from "/enigne.js";
-
-var engine = new Engine();
+var engine = Engine.getInstance()
 var lastSearched = "";
 
 async function getQuerry(requestDetails) {

@@ -1,9 +1,11 @@
 class Engine {
   constructor() {
-    if (Engine.instance == null) {
-      Engine.instance = this;
-    }
     this._engine = "";
+  }
+  static getInstance() {
+    if (!Engine.instance) {
+      Engine.instance = new Engine();
+    }
     return Engine.instance;
   }
   setSearchEnginge(newEngine) {

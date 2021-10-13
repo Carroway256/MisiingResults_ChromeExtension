@@ -4,7 +4,7 @@ export function main() {
   var duckEngine = "https://duckduckgo.com/?q=";
   var bingEngine = "https://www.bing.com/search?q=";
 
-  var engine = new Engine();
+  var engine = Engine.getInstance()
 
   document
     .getElementById("btnGoogle")
