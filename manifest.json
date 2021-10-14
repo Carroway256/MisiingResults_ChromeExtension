@@ -1,21 +1,38 @@
 {
-    "manifest_version":2,
+    "manifest_version": 2,
     "name": "foodtracker",
-    "version" : "0.2",
-
-    "browser_action":{
-        "default_popup":"popup.html"
+    "version": "0.2",
+    "browser_action": {
+        "default_popup": "popup.html"
     },
     "permissions": [
         "tabs",
         "webRequest",
         "<all_urls>",
         "storage"
+<<<<<<< Updated upstream
 
       ],
       "background" : {
 
           "scripts":["background.js"]
+=======
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.google.com/search?q=*"
+            ],
+            "js": [
+                "forbidenIndexes.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        "engine.js"
+    ],
+    "background": {
+        "page": "background.html"
+>>>>>>> Stashed changes
     }
-
 }

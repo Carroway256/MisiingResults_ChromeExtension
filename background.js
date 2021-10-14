@@ -1,8 +1,25 @@
+<<<<<<< Updated upstream
+=======
+import Engine from "/enigne.js";
+var engine = Engine.getInstance()
+
+console.log(engine)
+console.log(await engine.getSearchEngine())
+>>>>>>> Stashed changes
 var lastSearched = "";
 var engine = "";
 async function getQuerry(requestDetails) {
+<<<<<<< Updated upstream
   if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
     console.log("done");
+=======
+
+  console.log(engine)
+  if (
+    requestDetails.url == lastSearched ||
+    requestDetails.url == "https://www.google.com/webhp"
+  ) {
+>>>>>>> Stashed changes
     return;
   } else {
     let engine = await getEngine();

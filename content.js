@@ -3,6 +3,13 @@ var duckEngine = "https://duckduckgo.com/?q=";
 var bingEngine = "https://www.bing.com/search?q=";
 
 
+<<<<<<< Updated upstream
+=======
+  document
+    .getElementById("btnGoogle")
+    .addEventListener("click", () => engine.setSearchEnginge(googleEngine))
+
+>>>>>>> Stashed changes
 
 function asssignEngine(engine) {
   chrome.storage.local.set({ key: engine }, function () {
