@@ -10,13 +10,6 @@
         "webRequest",
         "<all_urls>",
         "storage"
-<<<<<<< Updated upstream
-
-      ],
-      "background" : {
-
-          "scripts":["background.js"]
-=======
     ],
     "content_scripts": [
         {
@@ -33,6 +26,5 @@
     ],
     "background": {
         "page": "background.html"
->>>>>>> Stashed changes
     }
 }

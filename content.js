@@ -1,27 +1,25 @@
+import engine from "./engine"
+
+document
+  .getElementById("btnGoogle")
+  .addEventListener(
+    "click",
+    () => (document.getElementById("Protein").innerHTML = "xd")
+  );
+
 var googleEngine = "https://www.google.com/search?q=";
 var duckEngine = "https://duckduckgo.com/?q=";
 var bingEngine = "https://www.bing.com/search?q=";
 
+var Engine = engine.getInstance()
+/*
+document
+  .getElementById("btnBing")
+  .addEventListener("click", () => engine.setSearchEnginge(bingEngine));
+  
 
-<<<<<<< Updated upstream
-=======
-  document
-    .getElementById("btnGoogle")
-    .addEventListener("click", () => engine.setSearchEnginge(googleEngine))
-
->>>>>>> Stashed changes
-
-function asssignEngine(engine) {
-  chrome.storage.local.set({ key: engine }, function () {
-
-  });
-}
-
-document.getElementById("btnGoogle").addEventListener("click",()=> asssignEngine(googleEngine));
-
-var btnBing = document.getElementById("btnBing");
-btnBing.addEventListener("click",()=> asssignEngine(bingEngine));
-
-var btnDuckDuckGo = document.getElementById("btnDuckDuckGo");
-btnDuckDuckGo.addEventListener("click",()=> asssignEngine(duckEngine));
-
+document
+  .getElementById("btnDuckDuckGo")
+  .addEventListener("click", () => engine.setSearchEnginge(duckEngine));
+  */
+  
