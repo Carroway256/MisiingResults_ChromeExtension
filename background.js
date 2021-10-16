@@ -4,7 +4,7 @@ var engine = Engine.getInstance()
 console.log(engine)
 console.log(await engine.getSearchEngine())
 var lastSearched = "";
-var engine = "";
+
 async function getQuerry(requestDetails) {
   if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
     console.log("done");
@@ -16,7 +16,7 @@ async function getQuerry(requestDetails) {
   ) {
     return;
   } else {
-    let engine = await getEngine();
+    let searchEngine = await engine.getSearchEngine();
     if (requestDetails.tabId >= 0) {
       const urlSearchParams = new URLSearchParams(requestDetails.url);
       const URL = urlSearchParams.toString();
@@ -25,7 +25,8 @@ async function getQuerry(requestDetails) {
       if (isURL(URL)) {
         var arrStr = URL.split(/[=&]/);
         var querry = arrStr[1];
-        chrome.tabs.update({ url: `${engine}${querry}` });
+        console.log(searchEngine);
+        chrome.tabs.update({ url: `${searchEngine}${querry}` });
       }
     }
   }
@@ -39,10 +40,19 @@ chrome.webRequest.onBeforeRequest.addListener(
   filter,
   opt_extraInfoSpec
 );
+function isInfinityloop (requestDetails)
+{
+  if (
+    requestDetails.url == lastSearched ||
+    requestDetails.url == "https://www.google.com/webhp"
+  ) {
+    return;
+}
+}
 
 function isURL(URL) {
   if (URL.startsWith("https%3A%2F%2Fwww.google.com%2Fsearch")) {
-    console.log("true")
+    console.log("true");
     return true;
   } else return false;
 }
