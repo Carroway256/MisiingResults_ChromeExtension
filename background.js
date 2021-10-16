@@ -1,8 +1,15 @@
-import Engine from "/enigne.js";
+import Engine from "/engine.js";
 var engine = Engine.getInstance()
+
+console.log(engine)
+console.log(await engine.getSearchEngine())
 var lastSearched = "";
 
 async function getQuerry(requestDetails) {
+  if (requestDetails.url == lastSearched || requestDetails.url=="https://www.google.com/webhp") {
+    console.log("done");
+
+  console.log(engine)
   if (
     requestDetails.url == lastSearched ||
     requestDetails.url == "https://www.google.com/webhp"
@@ -48,4 +55,14 @@ function isURL(URL) {
     console.log("true");
     return true;
   } else return false;
+}
+const getEngine = async () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(["key"], (result) => {
+      if (result["key"] === undefined) {
+        reject();
+      } else resolve(result["key"]);
+    });
+  });
+}
 }
