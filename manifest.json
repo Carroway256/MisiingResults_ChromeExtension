@@ -2,10 +2,7 @@
     "manifest_version":2,
     "name": "foodtracker",
     "version" : "0.2",
-    "omnibox": { "keyword" : "chrome" },
-    "icons": {
-        "16": "admin-privilege-icon.png"
-      },
+
     "browser_action":{
         "default_popup":"popup.html"
     },
@@ -16,9 +13,11 @@
         "storage"
 
       ],
+      "web_accessible_resources": [
+        "engine.js"
+     ],
       "background" : {
-
-          "scripts":["background.js"]
+            "page":"background.html"
     }
 
 }
